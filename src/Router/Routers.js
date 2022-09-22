@@ -7,7 +7,7 @@ function Routers() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<StartPage />} />
+        <Route path="/arithmetic-game" element={<StartPage />} />
         <Route path="/arithmetic" element={<ArithmeticPage />} />
       </Routes>
     </BrowserRouter>
