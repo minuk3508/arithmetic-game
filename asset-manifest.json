@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/arithmetic-game/static/js/main.5a4ed9cd.js",
+    "index.html": "/arithmetic-game/index.html",
+    "main.5a4ed9cd.js.map": "/arithmetic-game/static/js/main.5a4ed9cd.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.5a4ed9cd.js"
+  ]
+}
