@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { BsArrowRepeat } from "react-icons/bs";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { randomGenerator } from "../Modules/RandomGenerator";
+import { formulaGenerator } from "../Modules/FormulaGenerator";
 import Timer from "./Timer";
 
 const Container = styled.div`
@@ -143,47 +145,12 @@ const SubmitButton = styled.div`
     background-color: #aa8bb5;
   }
 `;
-const generateRandomNumber0_9 = () => {
-  const characters = "0123456789";
-  let result = "";
-  const charactersLength = characters.length;
-  for (let i = 0; i < 1; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-};
-const generateRandomNumber1_9 = () => {
-  const characters = "123456789";
-  let result = "";
-  const charactersLength = characters.length;
-  for (let i = 0; i < 1; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-};
-const generateRandomOperation = () => {
-  const characters = "+-x";
-  let result = "";
-  const charactersLength = characters.length;
-  for (let i = 0; i < 1; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-};
-const test = (a, b, c, d, e) => {
-  const firstNum = Number(a + b);
-  const secondNum = Number(c + d);
 
-  if (e === "+") {
-    return firstNum + secondNum;
-  } else if (e === "-") {
-    return firstNum - secondNum;
-  } else if (e === "x") {
-    return firstNum * secondNum;
-  }
-};
-
-function QuestionBox() {
+function QuestionBox({ recodeFuntion }) {
+  const [totalData, setTotalData] = useState({ recode: "", formula: "" });
+  const [correctFormula, setCorrectFormula] = useState([]);
+  const [correctRecode, setCorrectRecode] = useState([]);
+  const [time, setTime] = useState("");
   const [reset, setReset] = useState("");
   const [inputs, setInputs] = useState("");
   const [firstNumber, setFirstNumber] = useState("");
@@ -194,33 +161,40 @@ function QuestionBox() {
   const [correctValue, setCorrectValue] = useState(false);
   const correctButton = useRef(null);
   const inputRef = useRef(null);
-  const targetButton = document.getElementsByClassName(correctButton.current);
-  console.log(targetButton);
-  console.log(correctButton.current);
 
   useLayoutEffect(() => {
     if (inputRef.current !== null) inputRef.current.focus();
   });
   useEffect(() => {
-    setFirstNumber(generateRandomNumber1_9());
-    setSecondNumber(generateRandomNumber0_9());
-    setThirdNumber(generateRandomNumber1_9());
-    setForthNumber(generateRandomNumber0_9());
-    setOperation(generateRandomOperation());
+    setFirstNumber(randomGenerator("123456789"));
+    setSecondNumber(randomGenerator("0123456789"));
+    setThirdNumber(randomGenerator("123456789"));
+    setForthNumber(randomGenerator("0123456789"));
+    setOperation(randomGenerator("+-x"));
   }, [reset]);
+  useEffect(() => {
+    setTotalData({ recode: correctRecode, formula: correctFormula });
+  }, [correctRecode, correctFormula]);
+  useEffect(() => {
+    recodeFuntion(totalData);
+  }, [totalData, recodeFuntion]);
 
-  const onChange = (e) => {
-    const { value } = e.target;
-    const onlyNumber = value;
-    setInputs(onlyNumber);
-  };
-  const resetButton = () => {
-    setReset(generateRandomNumber0_9());
-    setInputs("");
+  const formulaPrint =
+    operation === "x"
+      ? `${firstNumber}${secondNumber} ${operation} ${forthNumber}`
+      : `${firstNumber}${secondNumber} ${operation} ${thirdNumber}${forthNumber}`;
+
+  const datatest = () => {
+    const oldForm = correctFormula;
+    const newForm = formulaPrint;
+    const oldRecode = correctRecode;
+    const newRecode = time;
+    setCorrectFormula([...oldForm, newForm]);
+    setCorrectRecode([...oldRecode, newRecode]);
   };
   const correctAnswer = () => {
     const inputAnswer = Number(inputs);
-    const answer = test(
+    const answer = formulaGenerator(
       firstNumber,
       secondNumber,
       thirdNumber,
@@ -231,16 +205,25 @@ function QuestionBox() {
       alert("이미 정답입니다. 다음문제로 넘어가세요");
     } else if (inputAnswer === answer) {
       setCorrectValue(true);
-      // setReset(generateRandomNumber0_9());
     } else {
       alert("틀렸어요!");
     }
     setInputs("");
   };
+  const onChange = (e) => {
+    const { value } = e.target;
+    const onlyNumber = value;
+    setInputs(onlyNumber);
+  };
+  const resetButton = () => {
+    setReset(randomGenerator("0123456789"));
+    setInputs("");
+  };
   const nextButton = () => {
-    setReset(generateRandomNumber0_9());
+    setReset(randomGenerator("0123456789"));
     setCorrectValue(false);
     setInputs("");
+    datatest();
   };
   const enterPress = (e) => {
     if (e.key === "Enter" && correctValue === false) {
@@ -252,11 +235,18 @@ function QuestionBox() {
   const clickContainer = () => {
     if (inputRef.current !== null) inputRef.current.focus();
   };
+  const giveMeTime = (time) => {
+    setTime(time);
+  };
   return (
     <Container onClick={clickContainer}>
       <QuestionBoxHead>
         <TimerBox>
-          <Timer reset={reset} correctValue={correctValue} />
+          <Timer
+            reset={reset}
+            correctValue={correctValue}
+            giveMeTime={giveMeTime}
+          />
         </TimerBox>
         <ResetBox onClick={resetButton}>
           <BsArrowRepeat />
@@ -268,19 +258,11 @@ function QuestionBox() {
           <Formula correctFont={correctValue ? "#78f542" : "white"}>
             {correctValue ? (
               <>
-                <span>
-                  {firstNumber}
-                  {secondNumber} {operation} {thirdNumber}
-                  {forthNumber}
-                </span>
+                <span>{formulaPrint}</span>
                 <Next onClick={nextButton}>{`정답!(Enter or Click)`}</Next>
               </>
             ) : (
-              <span>
-                {firstNumber}
-                {secondNumber} {operation} {thirdNumber}
-                {forthNumber}
-              </span>
+              <span>{formulaPrint}</span>
             )}
           </Formula>
         </Question>

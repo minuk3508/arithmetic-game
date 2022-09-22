@@ -11,12 +11,8 @@ const Container = styled.div`
   font-weight: 700;
   color: white;
 `;
-const TestButton = styled.div`
-  :hover {
-    cursor: pointer;
-  }
-`;
-function Timer({ reset, correctValue }) {
+
+function Timer({ reset, correctValue, giveMeTime }) {
   const [testValue, setTestValue] = useState(true);
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
@@ -24,8 +20,11 @@ function Timer({ reset, correctValue }) {
   let startTimer;
   useEffect(() => {
     setTestValue(!correctValue);
+    if (correctValue) {
+      giveMeTime(printer);
+    }
   }, [correctValue]);
-  console.log(testValue);
+
   useEffect(() => {
     if (testValue) {
       startTimer = setInterval(() => setSec((prev) => prev + 1), 1000);
@@ -46,12 +45,10 @@ function Timer({ reset, correctValue }) {
     setSec(0);
     console.log(reset);
   }, [reset]);
-
-  return (
-    <Container>
-      {min >= 10 ? `${min}` : `0${min}`}:{sec >= 10 ? `${sec}` : `0${sec}`}
-    </Container>
-  );
+  const printer = `${min >= 10 ? `${min}` : `0${min}`}:${
+    sec >= 10 ? `${sec}` : `0${sec}`
+  }`;
+  return <Container>{printer}</Container>;
 }
 
 export default Timer;
