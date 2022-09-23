@@ -7,6 +7,10 @@ const Container = styled.section`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
+
   width: 100%;
   height: 100%;
 `;

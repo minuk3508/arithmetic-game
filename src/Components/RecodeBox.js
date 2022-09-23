@@ -3,6 +3,11 @@ import { BsArrowRepeat, BsLightbulb } from "react-icons/bs";
 import { useEffect, useState } from "react";
 
 const Container = styled.div`
+  @media screen and (max-width: 767px) {
+    width: 70%;
+    height: 18rem;
+    margin: 5% 0%;
+  }
   width: 25rem;
   height: 26rem;
   border-radius: 2rem;

@@ -6,6 +6,11 @@ import { formulaGenerator } from "../Modules/FormulaGenerator";
 import Timer from "./Timer";
 
 const Container = styled.div`
+  @media screen and (max-width: 767px) {
+    width: 90%;
+    height: 25rem;
+    margin: 5% 0%;
+  }
   width: 55rem;
   height: 26rem;
   background-color: #722e99;

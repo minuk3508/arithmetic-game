@@ -69,6 +69,9 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  @media screen and (max-width: 767px) {
+    height: auto;
+  }
 `;
 
 const Title = styled.header`
@@ -84,6 +87,9 @@ const Title = styled.header`
 `;
 
 const ContentBox = styled.section`
+  @media screen and (max-width: 767px) {
+    height: auto;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,6 +97,9 @@ const ContentBox = styled.section`
   height: 75vh;
 `;
 const Footer = styled.footer`
+  @media screen and (max-width: 767px) {
+    height: 9vw;
+  }
   width: 100vw;
   height: 17vh;
 `;
