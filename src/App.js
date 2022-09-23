@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import Routers from "./Router/Routers";
+import ArithmeticPage from "./Pages/ArithmeticPage";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
@@ -101,7 +101,7 @@ function App() {
       <Container>
         <Title>암산 테스트</Title>
         <ContentBox>
-          <Routers />
+          <ArithmeticPage />
         </ContentBox>
         <Footer></Footer>
       </Container>
