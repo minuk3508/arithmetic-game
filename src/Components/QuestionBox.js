@@ -80,6 +80,11 @@ const Q = styled.div`
 const Formula = styled.div`
   display: flex;
   align-items: center;
+  @media screen and (max-width: ${mediaWidth}) {
+    flex-direction: column;
+    justify-content: end;
+    align-items: flex-start;
+  }
   width: 85%;
   height: 100%;
   font-size: 3rem;
@@ -93,6 +98,12 @@ const Next = styled.div`
   align-items: center;
   width: auto;
   height: 100%;
+  @media screen and (max-width: ${mediaWidth}) {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    margin-left: 0rem;
+    height: 10%;
+  }
   margin-top: 1rem;
   margin-left: 3rem;
   font-size: 1.2rem;
@@ -276,7 +287,10 @@ function QuestionBox({ recodeFuntion }) {
                 <Next onClick={nextButton}>{`정답!(Enter or Click)`}</Next>
               </>
             ) : (
-              <span>{formulaPrint}</span>
+              <>
+                <span>{formulaPrint}</span>
+                <Next>{``}</Next>
+              </>
             )}
           </Formula>
         </Question>

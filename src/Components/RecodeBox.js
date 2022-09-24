@@ -81,7 +81,9 @@ const Formula = styled.div`
   width: 45%;
   height: 100%;
   margin-left: 5%;
-
+  @media screen and (max-width: ${mediaWidth}) {
+    font-size: 1.2rem;
+  }
   font-size: 1.5rem;
   font-weight: 700;
 `;
@@ -91,10 +93,16 @@ const Recode = styled.div`
   flex-direction: column;
   width: 45%;
   height: 100%;
+  @media screen and (max-width: ${mediaWidth}) {
+    font-size: 1.2rem;
+  }
   font-size: 1.5rem;
   font-weight: 700;
 `;
 const Div = styled.div`
+  @media screen and (max-width: ${mediaWidth}) {
+    font-size: 1.2rem;
+  }
   margin-bottom: 10%;
 `;
 const Bottom = styled.div`
