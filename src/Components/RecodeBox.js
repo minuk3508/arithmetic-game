@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { BsArrowRepeat, BsLightbulb } from "react-icons/bs";
 import { useEffect, useState } from "react";
+const mediaWidth = "1345px";
 
 const Container = styled.div`
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: ${mediaWidth}) {
     width: 70%;
     height: 18rem;
     margin: 5% 0%;

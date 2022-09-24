@@ -2,12 +2,12 @@ import { useState } from "react";
 import styled from "styled-components";
 import QuestionBox from "../Components/QuestionBox";
 import RecodeBox from "../Components/RecodeBox";
-
+const mediaWidth = "1345px";
 const Container = styled.section`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: ${mediaWidth}) {
     flex-direction: column;
   }
 

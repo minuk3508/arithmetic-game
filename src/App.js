@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import ArithmeticPage from "./Pages/ArithmeticPage";
-
+const mediaWidth = "1345px";
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
 html, body, div, span, applet, object, iframe,
@@ -69,7 +69,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: ${mediaWidth}) {
     height: auto;
   }
 `;
@@ -87,7 +87,7 @@ const Title = styled.header`
 `;
 
 const ContentBox = styled.section`
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: ${mediaWidth}) {
     height: auto;
   }
   display: flex;
@@ -97,7 +97,7 @@ const ContentBox = styled.section`
   height: 75vh;
 `;
 const Footer = styled.footer`
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: ${mediaWidth}) {
     height: 9vw;
   }
   width: 100vw;
@@ -108,7 +108,9 @@ function App() {
     <>
       <GlobalStyle />
       <Container>
-        <Title>암산 테스트</Title>
+        <Title>
+          <h1>암산 테스트</h1>
+        </Title>
         <ContentBox>
           <ArithmeticPage />
         </ContentBox>

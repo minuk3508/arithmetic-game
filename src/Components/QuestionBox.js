@@ -4,9 +4,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { randomGenerator } from "../Modules/RandomGenerator";
 import { formulaGenerator } from "../Modules/FormulaGenerator";
 import Timer from "./Timer";
-
+const mediaWidth = "1345px";
 const Container = styled.div`
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: ${mediaWidth}) {
     width: 90%;
     height: 25rem;
     margin: 5% 0%;
@@ -28,6 +28,9 @@ const TimerBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: ${mediaWidth}) {
+    margin: 0% 10%;
+  }
   width: 20%;
   height: 100%;
 `;
@@ -65,6 +68,9 @@ const Q = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: ${mediaWidth}) {
+    margin: 0% 5%;
+  }
   width: 15%;
   height: 100%;
   font-size: 3rem;
@@ -117,6 +123,9 @@ const AnswerInput = styled.input`
   height: 80%;
   height: 4rem;
   padding: 0% 4%;
+  @media screen and (max-width: ${mediaWidth}) {
+    font-size: 1.7rem;
+  }
   font-size: 2rem;
   font-weight: 700;
   color: white;
